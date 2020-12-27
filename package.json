@@ -1,0 +1,27 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "MERN Stack E-commerce Project using React Redux Node MongoDB and Ant Design",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "npm start --prefix client" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AllAroundD/ecommerce.git"
+  },
+  "keywords": [
+    "E-commerce",
+    "React",
+    "Redux",
+    "Node",
+    "MongoDB"
+  ],
+  "author": "Doug Moore",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AllAroundD/ecommerce/issues"
+  },
+  "homepage": "https://github.com/AllAroundD/ecommerce#readme"
+}
