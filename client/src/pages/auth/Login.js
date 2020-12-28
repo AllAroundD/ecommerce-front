@@ -1,14 +1,21 @@
-import React, { useState } from "react"
-import { useDispatch } from 'react-redux'
+import React, { useState, useEffect } from "react"
+import { useDispatch, useSelector } from 'react-redux'
 import { auth, googleAuthProvider } from "../../firebase"
 import { toast } from "react-toastify"
 import { Button } from 'antd'
 import { MailOutlined, GoogleOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom'
 
 const Login = ({ history }) => {
     const [ email, setEmail ] = useState("mooredoug6@gmail.com")
-    const [ password, setPassword ] = useState("123456")
+    const [ password, setPassword ] = useState("666666")
     const [ loading, setLoading ] = useState(false)
+
+    const { user } = useSelector((state) => ({ ...state }))
+
+    useEffect(() => {
+        if(user && user.token) history.push('/')
+    }, [user])
 
     let dispatch = useDispatch()
 
@@ -25,7 +32,7 @@ const Login = ({ history }) => {
             dispatch({
                 type: "LOGGED_IN_USER",
                 payload: {
-                    user: user.email,
+                    email: user.email,
                     token: idTokenResult.token
                 }
             })
@@ -45,7 +52,7 @@ const Login = ({ history }) => {
             dispatch({
                 type: "LOGGED_IN_USER",
                 payload: {
-                    user: user.email,
+                    email: user.email,
                     token: idTokenResult.token
                 }
             })
@@ -116,6 +123,10 @@ const Login = ({ history }) => {
                     >
                         Login with Google
                     </Button>
+
+                    <Link to="/forgot/password" className="float-right text-danger">
+                        Forgot Password
+                    </Link>
                 </div>           
             </div>
         </div>
