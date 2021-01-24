@@ -17,8 +17,8 @@ const createOrUpdateUser = async (authtoken) => {
 }
 
 const Login = ({ history }) => {
-    const [ email, setEmail ] = useState("mooredoug6@gmail.com")
-    const [ password, setPassword ] = useState("666666")
+    const [ email, setEmail ] = useState("")
+    const [ password, setPassword ] = useState("")
     const [ loading, setLoading ] = useState(false)
 
     const { user } = useSelector((state) => ({ ...state }))
