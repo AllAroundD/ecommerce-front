@@ -2,8 +2,12 @@
 node_modules
 client/node_modules/
 client/build/
+config/
+
+server-not used/
 
 # misc
+.env
 client/.env
 .DS_Store
 .env.local
