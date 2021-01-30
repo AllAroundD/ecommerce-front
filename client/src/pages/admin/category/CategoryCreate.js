@@ -43,21 +43,21 @@ const CategoryCreate = () => {
   }
 
   const handleRemove = async (slug) => {
-    if (window.confirm("Are you sure you want to delete?")) {
+    if (window.confirm('Are you sure you want to delete?')) {
       setLoading(true)
       removeCategory(slug, user.token)
-      .then(res => {
-        setLoading(false)
-        toast.success(`${res.data.name} was deleted`)
-        loadCategories()
-      })
-      .catch(err => {
-        if (err.response.status === 400) {
-          console.error(`Error occurred during removal. `, err)
+        .then((res) => {
           setLoading(false)
-          toast.error(err.response.data)
-        }
-      })
+          toast.success(`"${res.data.name}" was deleted`)
+          loadCategories()
+        })
+        .catch((err) => {
+          if (err.response.status === 400) {
+            console.error(`Error occurred during removal. `, err)
+            setLoading(false)
+            toast.error(err.response.data)
+          }
+        })
     }
   }
 
@@ -98,7 +98,10 @@ const CategoryCreate = () => {
           {categories.map((c) => (
             <div className="alert alert-secondary" key={c._id}>
               {c.name}{' '}
-              <span onClick={() => handleRemove(c.slug)} className="btn btn-sm float-right">
+              <span
+                onClick={() => handleRemove(c.slug)}
+                className="btn btn-sm float-right"
+              >
                 <DeleteOutlined className="text-danger" />
               </span>{' '}
               <Link to={`/admin/category/${c.slug}`}>
