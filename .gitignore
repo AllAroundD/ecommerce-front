@@ -3,6 +3,7 @@ node_modules
 client/node_modules/
 client/build/
 config/
+client/src/firebase.js
 
 server-not used/
 
