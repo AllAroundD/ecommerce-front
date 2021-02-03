@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "client": "npm start --prefix client",
+    "start:development": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

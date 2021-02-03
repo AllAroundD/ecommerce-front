@@ -14,7 +14,7 @@ exports.create = async (req, res) => {
 exports.list = async (req, res) => {
   try {
     res.json(await Sub.find({}).sort({ createdAt: -1 }).exec())
-    console.log(`Sub categories retrieved.`)
+    console.log(`Sub categories retrieved`)
   } catch (error) {
     console.error(error)
     res.status(400).send('Failed to retrieve sub categories')
@@ -50,7 +50,7 @@ exports.update = async (req, res) => {
 
 exports.remove = async (req, res) => {
   try {
-    const deleted = await Category.findOneAndDelete({ slug: req.params.slug })
+    const deleted = await Sub.findOneAndDelete({ slug: req.params.slug })
     console.log(`Sub category deleted: ${deleted}`)
     res.json(deleted)
   } catch (error) {
