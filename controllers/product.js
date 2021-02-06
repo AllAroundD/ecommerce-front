@@ -15,3 +15,15 @@ exports.create = async (req, res) => {
     })
   }
 }
+
+exports.read = async (req, res) => {
+  try {
+    let products = await Product.find({})
+    res.json(products)
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      err: err.message,
+    })
+  }
+}
