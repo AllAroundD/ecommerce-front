@@ -47,12 +47,14 @@ const ProductCreate = () => {
     e.preventDefault()
     createProduct(values, user.token)
       .then((res) => {
-        console.log(res)
-        toast.success(`Product "${res.data.title}" was created`)
+        // console.log(res)
+        window.alert(`Product "${res.data.title}" was created`)
+        window.location.reload()
       })
       .catch((err) => {
         console.error(`Create Product failed. `, err)
-        if (err.response.status === 400) toast.error(err.response.data)
+        // if (err.response.status === 400) toast.error(err.response.data)
+        toast.error(err.response.data.err)
       })
   }
 
