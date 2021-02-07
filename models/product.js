@@ -28,11 +28,11 @@ const productSchema = new mongoose.Schema(
       required: true,
       maxlength: 32,
     },
+    category: {
+      type: ObjectId,
+      ref: 'Category',
+    },
     // TODO
-    // category: {
-    //   type: ObjectId,
-    //   ref: 'Category',
-    // },
     // subs: [
     //   {
     //     type: ObjectId,
