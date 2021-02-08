@@ -1,6 +1,11 @@
 import React from 'react'
 
-const ProductCreateForm = ({ handleChange, handleSubmit, values }) => {
+const ProductCreateForm = ({
+  handleChange,
+  handleSubmit,
+  handleCategoryChange,
+  values,
+}) => {
   const {
     title,
     description,
@@ -121,7 +126,7 @@ const ProductCreateForm = ({ handleChange, handleSubmit, values }) => {
           name="category"
           id="category"
           className="form-control"
-          onChange={handleChange}
+          onChange={handleCategoryChange}
         >
           <option value="">Please select</option>
           {categories.length > 0 &&
