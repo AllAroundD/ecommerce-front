@@ -30,6 +30,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "by-node-env": "^2.0.1",
+    "cloudinary": "^1.24.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
