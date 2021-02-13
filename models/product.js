@@ -43,10 +43,9 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    // TODO
-    // images: {
-    //   type: Array,
-    // },
+    images: {
+      type: Array,
+    },
     shipping: {
       type: String,
       enum: ['Yes', 'No'],
@@ -59,6 +58,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       enum: ['Apple', 'Samsung', 'Microsoft', 'Lenovo', 'Asus'],
     },
+    // TODO
     // ratings: [
     //   {
     //     star: Number,

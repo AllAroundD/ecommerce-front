@@ -6,6 +6,7 @@ import { createProduct } from '../../../functions/product'
 import ProductCreateForm from '../../../components/forms/ProductCreateForm'
 import { getCategories, getCategorySubs } from '../../../functions/category'
 import FileUpload from '../../../components/forms/FileUpload'
+import { LoadingOutlined } from '@ant-design/icons'
 
 const initialState = {
   title: '',
@@ -16,7 +17,18 @@ const initialState = {
   subs: [],
   shipping: '',
   quantity: '',
-  images: [],
+  images: [
+    // {
+    //   public_id: 'woccpc1irlv0stljo507',
+    //   url:
+    //     'https://res.cloudinary.com/dgy6cve9l/image/upload/v1613234575/woccpc1irlv0stljo507.jpg',
+    // },
+    // {
+    //   public_id: 'h8pvkt2xphcr9aus7blr',
+    //   url:
+    //     'https://res.cloudinary.com/dgy6cve9l/image/upload/v1613234574/h8pvkt2xphcr9aus7blr.jpg',
+    // },
+  ],
   colors: ['Black', 'Brown', 'Silver', 'White', 'Blue'],
   brands: ['Apple', 'Samsung', 'Microsoft', 'Lenovo', 'Asus'],
   color: '',
@@ -77,7 +89,11 @@ const ProductCreate = () => {
           <AdminNav />
         </div>
         <div className="col-md-10">
-          <h4>Product Create Form</h4>
+          {loading ? (
+            <LoadingOutlined className="text-danger h1" />
+          ) : (
+            <h4>Product Create</h4>
+          )}
           <hr />
 
           {JSON.stringify(values.images)}
