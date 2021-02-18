@@ -27,7 +27,7 @@ const ProductUpdate = ({ match }) => {
   const [values, setValues] = useState(initialState)
   const [subOptions, setSubOptions] = useState([])
   const [categories, setCategories] = useState([])
-  const [showSub, setShowSub] = useState(false)
+  const [arrayOfSubs, setArrayofSubs] = useState([])
   // redux
   const { user } = useSelector((state) => ({ ...state }))
   const { slug } = match.params
@@ -39,14 +39,26 @@ const ProductUpdate = ({ match }) => {
 
   const loadProduct = () => {
     getProduct(slug).then((p) => {
+      // load single product
       setValues({ ...values, ...p.data })
+      // load single product category subs
+      getCategorySubs(p.data.category._id).then((res) => {
+        setSubOptions(res.data) // on first load, show default subs
+      })
+      // prepare array of ids to show as default sub values in antd Select
+      let arr = []
+      p.data.subs.map((s) => {
+        arr.push(s._id)
+      })
+      console.log('Array of subs', arr)
+      setArrayofSubs((prev) => arr) // required for antd Select to work
     })
     // console.log('single product', values)
   }
 
   const loadCategories = () =>
     getCategories().then((c) => {
-      console.log('GET CATEGORIES IN UPDATE PRODUCT', c.data)
+      // console.log('GET CATEGORIES IN UPDATE PRODUCT', c.data)
       setCategories(c.data)
     })
 
@@ -97,8 +109,9 @@ const ProductUpdate = ({ match }) => {
             setValues={setValues}
             values={values}
             subOptions={subOptions}
-            showSub={showSub}
             categories={categories}
+            arrayOfSubs={arrayOfSubs}
+            setArrayofSubs={setArrayofSubs}
           />
         </div>
       </div>

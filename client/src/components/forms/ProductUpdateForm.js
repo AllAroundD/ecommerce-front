@@ -10,8 +10,9 @@ const ProductUpdateForm = ({
   setValues,
   values,
   subOptions,
-  showSub,
   categories,
+  arrayOfSubs,
+  setArrayofSubs,
 }) => {
   const {
     title,
@@ -143,25 +144,24 @@ const ProductUpdateForm = ({
         </select>
       </div>
 
-      {showSub && (
-        <div>
-          <label htmlFor="subcategory">Sub Categories</label>
-          <Select
-            mode="multiple"
-            style={{ width: '100%' }}
-            placeholder="Please select"
-            value={subs}
-            onChange={(value) => setValues({ ...values, subs: value })}
-          >
-            {subOptions.length &&
-              subOptions.map((s) => (
-                <Option key={s._id} value={s._id}>
-                  {s.name}
-                </Option>
-              ))}
-          </Select>
-        </div>
-      )}
+      <div>
+        <label htmlFor="subcategory">Sub Categories</label>
+        <Select
+          mode="multiple"
+          style={{ width: '100%' }}
+          placeholder="Please select"
+          value={arrayOfSubs}
+          onChange={(value) => setArrayofSubs(value)}
+        >
+          {subOptions.length &&
+            subOptions.map((s) => (
+              <Option key={s._id} value={s._id}>
+                {s.name}
+              </Option>
+            ))}
+        </Select>
+      </div>
+
       <br />
 
       <button className="btn btn-outline-info">Save</button>
