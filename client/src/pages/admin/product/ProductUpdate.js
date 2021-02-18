@@ -12,7 +12,6 @@ const initialState = {
   title: '',
   description: '',
   price: '',
-  categories: [],
   category: '',
   subs: [],
   shipping: '',
@@ -26,8 +25,8 @@ const initialState = {
 
 const ProductUpdate = ({ match }) => {
   const [values, setValues] = useState(initialState)
-
   const [subOptions, setSubOptions] = useState([])
+  const [categories, setCategories] = useState([])
   const [showSub, setShowSub] = useState(false)
   // redux
   const { user } = useSelector((state) => ({ ...state }))
@@ -35,6 +34,7 @@ const ProductUpdate = ({ match }) => {
 
   useEffect(() => {
     loadProduct()
+    loadCategories()
   }, [])
 
   const loadProduct = () => {
@@ -43,6 +43,12 @@ const ProductUpdate = ({ match }) => {
     })
     // console.log('single product', values)
   }
+
+  const loadCategories = () =>
+    getCategories().then((c) => {
+      console.log('GET CATEGORIES IN UPDATE PRODUCT', c.data)
+      setCategories(c.data)
+    })
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -72,7 +78,6 @@ const ProductUpdate = ({ match }) => {
       console.log('SUB OPTIONS ON CATEGORY CLICK', res)
       setSubOptions(res.data)
     })
-    setShowSub(true)
   }
 
   return (
@@ -84,7 +89,7 @@ const ProductUpdate = ({ match }) => {
         <div className="col-md-10">
           <h4>Product Update</h4>
           <hr />
-          {/* {JSON.stringify(values)} */}
+          {JSON.stringify(values)}
           <ProductUpdateForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
@@ -93,6 +98,7 @@ const ProductUpdate = ({ match }) => {
             values={values}
             subOptions={subOptions}
             showSub={showSub}
+            categories={categories}
           />
         </div>
       </div>
