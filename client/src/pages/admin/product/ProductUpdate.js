@@ -28,8 +28,10 @@ const ProductUpdate = ({ match }) => {
   const [subOptions, setSubOptions] = useState([])
   const [categories, setCategories] = useState([])
   const [arrayOfSubs, setArrayofSubs] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState('')
   // redux
   const { user } = useSelector((state) => ({ ...state }))
+
   const { slug } = match.params
 
   useEffect(() => {
@@ -85,11 +87,24 @@ const ProductUpdate = ({ match }) => {
   const handleCategoryChange = (e) => {
     e.preventDefault()
     console.log('CLICKED CATEGORY', e.target.value)
-    setValues({ ...values, subs: [], category: e.target.value })
+    setValues({ ...values, subs: [] })
+
+    setSelectedCategory(e.target.value)
+
     getCategorySubs(e.target.value).then((res) => {
       console.log('SUB OPTIONS ON CATEGORY CLICK', res)
       setSubOptions(res.data)
     })
+
+    console.log('EXISTING CATEGORY values.category', values.category)
+
+    // if user clicks back to the original category, show its sub categories in default
+    if (values.category._id === e.target.value) {
+      loadProduct()
+    }
+
+    // clear old sub category ids
+    setArrayofSubs([])
   }
 
   return (
@@ -112,6 +127,7 @@ const ProductUpdate = ({ match }) => {
             categories={categories}
             arrayOfSubs={arrayOfSubs}
             setArrayofSubs={setArrayofSubs}
+            selectedCategory={selectedCategory}
           />
         </div>
       </div>
