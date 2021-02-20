@@ -4,7 +4,7 @@ import ProductCard from '../cards/ProductCard'
 import LoadingCard from '../cards/LoadingCard'
 import { Pagination } from 'antd'
 
-const NewArrivals = () => {
+const BestSellers = () => {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(false)
   const [productsCount, setProductsCount] = useState(0)
@@ -20,7 +20,7 @@ const NewArrivals = () => {
 
   const loadAllProducts = () => {
     setLoading(true)
-    getProducts('createdAt', 'desc', page).then((res) => {
+    getProducts('sold', 'desc', page).then((res) => {
       setProducts(res.data)
       setLoading(false)
     })
@@ -41,7 +41,6 @@ const NewArrivals = () => {
           </div>
         )}
       </div>
-
       <div className="row">
         <nav className="col-md-4 offset-md-4 text-center pt-5 p-3">
           <Pagination
@@ -55,4 +54,4 @@ const NewArrivals = () => {
   )
 }
 
-export default NewArrivals
+export default BestSellers
