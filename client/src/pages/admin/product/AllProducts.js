@@ -61,6 +61,7 @@ const AllProducts = () => {
                 <AdminProductCard
                   product={product}
                   handleRemove={handleRemove}
+                  loading={loading}
                 />
               </div>
             ))}
