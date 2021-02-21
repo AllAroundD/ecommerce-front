@@ -72,3 +72,50 @@ exports.update = async (req, res) => {
     })
   }
 }
+
+// without pagination
+// return all products based on sort, order, limit
+// exports.list = async (req, res) => {
+//   try {
+//     const { sort, order, limit } = req.body
+//     const products = await Product.find({})
+//       .populate('category')
+//       .populate('subs')
+//       .sort([[sort, order]])
+//       .limit(limit)
+//       .exec()
+//     res.json(products)
+//   } catch (err) {
+//     console.error('Products post error: ', err)
+//   }
+// }
+
+// with pagination
+exports.list = async (req, res) => {
+  try {
+    const { sort, order, page } = req.body
+    // console.table(req.body)
+    const currentPage = page || 1
+    const perPage = 3
+
+    const products = await Product.find({})
+      .skip((currentPage - 1) * perPage)
+      .populate('category')
+      .populate('subs')
+      .sort([[sort, order]])
+      .limit(perPage)
+      .exec()
+    res.json(products)
+  } catch (err) {
+    console.error('Products list error: ', err)
+  }
+}
+
+exports.productsCount = async (req, res) => {
+  try {
+    let total = await Product.find({}).estimatedDocumentCount().exec()
+    res.json(total)
+  } catch (err) {
+    console.error('Products count error: ', err)
+  }
+}

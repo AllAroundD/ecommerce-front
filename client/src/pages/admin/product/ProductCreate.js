@@ -7,6 +7,7 @@ import ProductCreateForm from '../../../components/forms/ProductCreateForm'
 import { getCategories, getCategorySubs } from '../../../functions/category'
 import FileUpload from '../../../components/forms/FileUpload'
 import { LoadingOutlined } from '@ant-design/icons'
+import { Modal } from 'antd'
 
 const initialState = {
   title: '',
@@ -17,18 +18,7 @@ const initialState = {
   subs: [],
   shipping: '',
   quantity: '',
-  images: [
-    // {
-    //   public_id: 'woccpc1irlv0stljo507',
-    //   url:
-    //     'https://res.cloudinary.com/dgy6cve9l/image/upload/v1613234575/woccpc1irlv0stljo507.jpg',
-    // },
-    // {
-    //   public_id: 'h8pvkt2xphcr9aus7blr',
-    //   url:
-    //     'https://res.cloudinary.com/dgy6cve9l/image/upload/v1613234574/h8pvkt2xphcr9aus7blr.jpg',
-    // },
-  ],
+  images: [],
   colors: ['Black', 'Brown', 'Silver', 'White', 'Blue'],
   brands: ['Apple', 'Samsung', 'Microsoft', 'Lenovo', 'Asus'],
   color: '',
@@ -51,13 +41,30 @@ const ProductCreate = () => {
   const loadCategories = () =>
     getCategories().then((c) => setValues({ ...values, categories: c.data }))
 
+  const success = (res) => {
+    Modal.success({
+      title: `Product created`,
+      content: (
+        <div>
+          <p>
+            Product <b>{`${res.data.title}`}</b> was created
+          </p>
+        </div>
+      ),
+      onOk() {
+        window.location.reload()
+      },
+    })
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     createProduct(values, user.token)
       .then((res) => {
         // console.log(res)
-        window.alert(`Product "${res.data.title}" was created`)
-        window.location.reload()
+        success(res)
+        // window.alert(`Product "${res.data.title}" was created`)
+        // window.location.reload()
       })
       .catch((err) => {
         console.error(`Create Product failed. `, err)
@@ -73,10 +80,10 @@ const ProductCreate = () => {
 
   const handleCategoryChange = (e) => {
     e.preventDefault()
-    console.log('CLICKED CATEGORY', e.target.value)
+    // console.log('CLICKED CATEGORY', e.target.value)
     setValues({ ...values, subs: [], category: e.target.value })
     getCategorySubs(e.target.value).then((res) => {
-      console.log('SUB OPTIONS ON CATEGORY CLICK', res)
+      // console.log('SUB OPTIONS ON CATEGORY CLICK', res)
       setSubOptions(res.data)
     })
     setShowSub(true)

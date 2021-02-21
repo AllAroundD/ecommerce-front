@@ -4,6 +4,10 @@ import { getProductsByCount, removeProduct } from '../../../functions/product'
 import AdminProductCard from '../../../components/cards/AdminProductCard'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
+import { Modal, Button, Space } from 'antd'
+import { ExclamationCircleOutlined } from '@ant-design/icons'
+
+const { confirm } = Modal
 
 const AllProducts = () => {
   const [products, setProducts] = useState([])
@@ -27,19 +31,32 @@ const AllProducts = () => {
       })
   }
 
+  const showDeleteConfirm = (slug) => {
+    confirm({
+      title: 'Are you sure you want to delete this product?',
+      icon: <ExclamationCircleOutlined />,
+      content: 'The product will be permanently deleted',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        console.log('OK')
+        removeProduct(slug, user.token)
+          .then((res) => {
+            loadAllProducts()
+            toast.error(`${res.data.title} was deleted`)
+          })
+          .catch((err) => {
+            if (err.response.status === 400) toast.error(err.response.data)
+            console.error(err)
+          })
+      },
+      onCancel() {},
+    })
+  }
+
   const handleRemove = (slug) => {
-    if (window.confirm('Are you sure you want to delete?')) {
-      // console.log('send delete request', slug)
-      removeProduct(slug, user.token)
-        .then((res) => {
-          loadAllProducts()
-          toast.error(`${res.data.title} was deleted`)
-        })
-        .catch((err) => {
-          if (err.response.status === 400) toast.error(err.response.data)
-          console.error(err)
-        })
-    }
+    showDeleteConfirm(slug)
   }
 
   return (
