@@ -11,6 +11,10 @@ import { Link } from 'react-router-dom'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import CategoryForm from '../../../components/forms/CategoryForm'
 import LocalSearch from '../../../components/forms/LocalSearch'
+import { Modal } from 'antd'
+import { ExclamationCircleOutlined } from '@ant-design/icons'
+
+const { confirm } = Modal
 
 const CategoryCreate = () => {
   const { user } = useSelector((state) => ({ ...state }))
@@ -46,23 +50,36 @@ const CategoryCreate = () => {
       })
   }
 
-  const handleRemove = async (slug) => {
-    if (window.confirm('Are you sure you want to delete?')) {
-      setLoading(true)
-      removeCategory(slug, user.token)
-        .then((res) => {
-          setLoading(false)
-          toast.success(`"${res.data.name}" was deleted`)
-          loadCategories()
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            console.error(`Error occurred during removal. `, err)
+  const showDeleteConfirm = (slug) => {
+    confirm({
+      title: 'Are you sure you want to delete this category?',
+      icon: <ExclamationCircleOutlined />,
+      content: 'The category will be permanently deleted',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        setLoading(true)
+        removeCategory(slug, user.token)
+          .then((res) => {
             setLoading(false)
-            toast.error(err.response.data)
-          }
-        })
-    }
+            toast.success(`"${res.data.name}" was deleted`)
+            loadCategories()
+          })
+          .catch((err) => {
+            if (err.response.status === 400) {
+              console.error(`Error occurred during removal. `, err)
+              setLoading(false)
+              toast.error(err.response.data)
+            }
+          })
+      },
+      onCancel() {},
+    })
+  }
+
+  const handleRemove = async (slug) => {
+    showDeleteConfirm(slug)
   }
 
   const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword)

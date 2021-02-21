@@ -8,6 +8,10 @@ import { Link } from 'react-router-dom'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import CategoryForm from '../../../components/forms/CategoryForm'
 import LocalSearch from '../../../components/forms/LocalSearch'
+import { Modal } from 'antd'
+import { ExclamationCircleOutlined } from '@ant-design/icons'
+
+const { confirm } = Modal
 
 const SubCreate = () => {
   const { user } = useSelector((state) => ({ ...state }))
@@ -48,23 +52,52 @@ const SubCreate = () => {
       })
   }
 
-  const handleRemove = async (slug) => {
-    if (window.confirm('Are you sure you want to delete?')) {
-      setLoading(true)
-      removeSub(slug, user.token)
-        .then((res) => {
-          setLoading(false)
-          toast.success(`"${res.data.name}" was deleted`)
-          loadSubs()
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            console.error(`Error occurred during removal. `, err)
+  const showDeleteConfirm = (slug) => {
+    confirm({
+      title: 'Are you sure you want to delete this sub category?',
+      icon: <ExclamationCircleOutlined />,
+      content: 'The sub category will be permanently deleted',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        setLoading(true)
+        removeSub(slug, user.token)
+          .then((res) => {
             setLoading(false)
-            toast.error(err.response.data)
-          }
-        })
-    }
+            toast.success(`"${res.data.name}" was deleted`)
+            loadSubs()
+          })
+          .catch((err) => {
+            if (err.response.status === 400) {
+              console.error(`Error occurred during removal. `, err)
+              setLoading(false)
+              toast.error(err.response.data)
+            }
+          })
+      },
+      onCancel() {},
+    })
+  }
+
+  const handleRemove = async (slug) => {
+    showDeleteConfirm(slug)
+    // if (window.confirm('Are you sure you want to delete?')) {
+    //   setLoading(true)
+    //   removeSub(slug, user.token)
+    //     .then((res) => {
+    //       setLoading(false)
+    //       toast.success(`"${res.data.name}" was deleted`)
+    //       loadSubs()
+    //     })
+    //     .catch((err) => {
+    //       if (err.response.status === 400) {
+    //         console.error(`Error occurred during removal. `, err)
+    //         setLoading(false)
+    //         toast.error(err.response.data)
+    //       }
+    //     })
+    // }
   }
 
   const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword)

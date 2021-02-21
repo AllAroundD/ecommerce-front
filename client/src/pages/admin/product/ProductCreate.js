@@ -59,6 +59,20 @@ const ProductCreate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (
+      !values.title ||
+      !values.description ||
+      !values.price ||
+      !values.category ||
+      !values.subs.length ||
+      !values.shipping ||
+      !values.quantity ||
+      !values.color ||
+      !values.brand
+    ) {
+      toast.error('Missing information. Please check form fields.')
+      return
+    }
     createProduct(values, user.token)
       .then((res) => {
         // console.log(res)
@@ -103,7 +117,7 @@ const ProductCreate = () => {
           )}
           <hr />
 
-          {JSON.stringify(values.images)}
+          {/* {JSON.stringify(values.images)} */}
 
           <div className="p-3">
             <FileUpload

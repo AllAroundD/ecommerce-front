@@ -4,7 +4,7 @@ import { getProductsByCount, removeProduct } from '../../../functions/product'
 import AdminProductCard from '../../../components/cards/AdminProductCard'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import { Modal, Button, Space } from 'antd'
+import { Modal } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 
 const { confirm } = Modal
@@ -40,7 +40,6 @@ const AllProducts = () => {
       okType: 'danger',
       cancelText: 'No',
       onOk() {
-        console.log('OK')
         removeProduct(slug, user.token)
           .then((res) => {
             loadAllProducts()
