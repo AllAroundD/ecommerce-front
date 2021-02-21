@@ -119,7 +119,7 @@ const ProductCreateForm = ({
         >
           <option>Please select</option>
           {brands.map((b) => (
-            <option key={b} value={b}>
+            <option key={b._id} value={b._id}>
               {b}
             </option>
           ))}

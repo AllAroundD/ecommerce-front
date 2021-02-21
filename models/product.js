@@ -54,7 +54,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       enum: ['Black', 'Brown', 'Silver', 'White', 'Blue'],
     },
-    Brand: {
+    brand: {
       type: String,
       enum: ['Apple', 'Samsung', 'Microsoft', 'Lenovo', 'Asus'],
     },
