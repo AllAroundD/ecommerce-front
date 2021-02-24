@@ -119,3 +119,42 @@ exports.productsCount = async (req, res) => {
     console.error('Products count error: ', err)
   }
 }
+
+exports.productStar = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.productId).exec()
+    const user = await User.findOne({ email: req.user.email }).exec()
+    const { star } = req.body
+
+    // check if currently logged in user has already rated product
+    let existingRatingObject = product.ratings.find(
+      (element) => element.postedBy.toString() === user._id.toString(),
+    )
+
+    // if user hasn't left rating yet, push it
+    if (existingRatingObject === undefined) {
+      let ratingsAdded = await Product.findByIdAndUpdate(
+        product._id,
+        {
+          $push: { ratings: { star, postedBy: user.id } },
+        },
+        { new: true },
+      ).exec()
+      console.log('ratingsAdded', ratingsAdded)
+      res.json(ratingsAdded)
+    } else {
+      // if user has already left rating, update it
+      const ratingUpdated = await Product.updateOne(
+        {
+          ratings: { $elemMatch: existingRatingObject },
+        },
+        { $set: { 'ratings.$.star': star } },
+        { new: true },
+      ).exec()
+      console.log('ratingUpdated', ratingUpdated)
+      res.json(ratingUpdated)
+    }
+  } catch (err) {
+    console.error('Product star error: ', err)
+  }
+}
