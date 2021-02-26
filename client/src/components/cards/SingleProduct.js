@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Card, Tabs } from 'antd'
 import { Link } from 'react-router-dom'
 import { HeartOutlined, ShoppingCartOutlined } from '@ant-design/icons'
@@ -11,9 +11,9 @@ import RatingModal from '../modal/RatingModal'
 
 const { TabPane } = Tabs
 
-const SingleProduct = ({ product }) => {
+// This is child component of Product page
+const SingleProduct = ({ product, onStarClick, star }) => {
   const { title, images, description, _id } = product
-  const [rating, setRating] = useState(0)
 
   return (
     <>
@@ -59,11 +59,8 @@ const SingleProduct = ({ product }) => {
               <StarRating
                 name={_id}
                 numberOfStars={5}
-                rating={rating}
-                changeRating={(newRating, name) => {
-                  // console.log('newRating', newRating, 'name', name)
-                  setRating(newRating)
-                }}
+                rating={star}
+                changeRating={onStarClick}
                 isSelectable={true}
                 starRatedColor="red"
               />
