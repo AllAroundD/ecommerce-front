@@ -4,7 +4,7 @@ const slugify = require('slugify')
 
 exports.create = async (req, res) => {
   try {
-    console.log(req.body)
+    // console.log(req.body)
     req.body.slug = slugify(req.body.title)
     const newProduct = await new Product(req.body).save()
     res.json(newProduct)
@@ -161,17 +161,21 @@ exports.productStar = async (req, res) => {
 }
 
 exports.listRelated = async (req, res) => {
-  const product = await Product.findById(req.params.productId).exec()
+  try {
+    const product = await Product.findById(req.params.productId).exec()
 
-  const related = await Product.find({
-    _id: { $ne: product._id },
-    category: product.category,
-  })
-    .limit(3)
-    .populate('category')
-    .populate('subs')
-    .populate('postedBy')
-    .exec()
+    const related = await Product.find({
+      _id: { $ne: product._id },
+      category: product.category,
+    })
+      .limit(3)
+      .populate('category')
+      .populate('subs')
+      .populate('postedBy')
+      .exec()
 
-  res.json(related)
+    res.json(related)
+  } catch (error) {
+    console.error('Related list error: ', err)
+  }
 }
