@@ -1,4 +1,5 @@
 const Category = require('../models/category')
+const Product = require('../models/product')
 const Sub = require('../models/sub')
 const slugify = require('slugify')
 
@@ -27,7 +28,14 @@ exports.read = async (req, res) => {
   try {
     let category = await Category.findOne({ slug: req.params.slug }).exec()
     console.log(`Category retrieved: ${category}`)
-    res.json(category)
+    // res.json(category)
+    const products = await Product.find({ category })
+      .populate('category')
+      .exec()
+    res.json({
+      category,
+      products,
+    })
   } catch (error) {
     console.error(error)
     res.status(400).send('Failed to retrieve category')
