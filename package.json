@@ -4,10 +4,10 @@
   "description": "MERN Stack E-commerce Project using React Redux Node MongoDB and Ant Design",
   "main": "server.js",
   "scripts": {
+    "client": "npm start --prefix client",
     "start": "by-node-env",
     "start:production": "node server.js",
     "start:development": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "client": "npm start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
