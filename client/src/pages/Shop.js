@@ -44,7 +44,6 @@ const Shop = () => {
     'Blue',
   ])
   const [color, setColor] = useState('')
-  const [shippingList, setShippingList] = useState(['Yes', 'No'])
   const [shipping, setShipping] = useState('')
 
   let dispatch = useDispatch()
@@ -267,20 +266,28 @@ const Shop = () => {
   }
 
   // 9. show products based on shipping
-  const showShipping = () =>
-    shippingList.map((s) => (
-      <Radio
-        value={s}
-        name={s}
-        checked={s === shipping}
-        onChange={handleShipping}
-        className="pb-1 pl-4 pr-4"
+  const showShipping = () => (
+    <>
+      <Checkbox
+        className="pb-2 pl-4 pr-4"
+        onChange={handleShippingChange}
+        value="Yes"
+        checked={shipping === 'Yes'}
       >
-        {s}
-      </Radio>
-    ))
+        Yes
+      </Checkbox>
+      <Checkbox
+        className="pb-2 pl-4 pr-4"
+        onChange={handleShippingChange}
+        value="No"
+        checked={shipping === 'No'}
+      >
+        No
+      </Checkbox>
+    </>
+  )
 
-  const handleShipping = (e) => {
+  const handleShippingChange = (e) => {
     setSub('')
     dispatch({
       type: 'SEARCH_QUERY',
