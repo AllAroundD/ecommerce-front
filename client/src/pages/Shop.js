@@ -238,8 +238,9 @@ const Shop = () => {
 
   // 8. show products based on color
   const showColors = () =>
-    colors.map((c) => (
+    colors.map((c, i) => (
       <Radio
+        key={i}
         value={c}
         name={c}
         checked={c === color}
