@@ -209,9 +209,9 @@ const Shop = () => {
   }
   // 7. show products based on brand name
   const showBrands = () =>
-    brands.map((b) => (
+    brands.map((b, i) => (
       <Radio
-        key={b}
+        key={i}
         value={b}
         name={b}
         checked={b === brand}
@@ -241,7 +241,7 @@ const Shop = () => {
   const showColors = () =>
     colors.map((c, i) => (
       <Radio
-        // key={i}
+        key={i}
         value={c}
         name={c}
         checked={c === color}

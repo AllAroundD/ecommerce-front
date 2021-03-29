@@ -9,7 +9,7 @@ import {
   CloseOutlined,
 } from '@ant-design/icons'
 
-const ProductCardinCheckout = ({ p }) => {
+const ProductCardInCheckout = ({ p }) => {
   const colors = ['Black', 'Brown', 'Silver', 'White', 'Blue']
   let dispatch = useDispatch()
 
@@ -120,8 +120,8 @@ const ProductCardinCheckout = ({ p }) => {
             )}
             {colors
               .filter((c) => c !== p.color)
-              .map((c) => (
-                <option key={c} value={c}>
+              .map((c, i) => (
+                <option key={i} value={c}>
                   {c}
                 </option>
               ))}
@@ -153,4 +153,4 @@ const ProductCardinCheckout = ({ p }) => {
   )
 }
 
-export default ProductCardinCheckout
+export default ProductCardInCheckout

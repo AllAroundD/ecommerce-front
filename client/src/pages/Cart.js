@@ -2,8 +2,9 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ProductCardInCheckout from '../components/cards/ProductCardInCheckout'
+import { userCart } from '../functions/user'
 
-const Cart = () => {
+const Cart = ({ history }) => {
   const { user, cart } = useSelector((state) => ({ ...state }))
   const dispatch = useDispatch()
 
@@ -14,7 +15,13 @@ const Cart = () => {
   }
 
   const saveOrderToDB = () => {
-    //
+    // console.log('cart', JSON.stringify(cart, null, 4))
+    userCart(cart, user.token)
+      .then((res) => {
+        console.log('CART POST RES', res)
+        if (res.data.ok) history.push('/checkout')
+      })
+      .catch((err) => console.log('cart save error', err))
   }
 
   const showCartItems = () => (
