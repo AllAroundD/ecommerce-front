@@ -10,25 +10,24 @@ require('dotenv').config()
 const app = express()
 
 // db
-mongoose.connect(process.env.DATABASE, {
+mongoose
+  .connect(process.env.DATABASE, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useFindAndModify: true,
+    // useFindAndModify: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
-})
-.then(() => console.log('DB CONNECTED'))
-.catch(err => console.error(`DB CONNECTION ERR ${err}`))
+    useFindAndModify: false,
+  })
+  .then(() => console.log('DB CONNECTED'))
+  .catch((err) => console.error(`DB CONNECTION ERR ${err}`))
 
 // middlewares
 app.use(morgan('dev'))
-app.use(bodyParser.json({ limit: "2mb" }))  //optional limit
+app.use(bodyParser.json({ limit: '2mb' })) //optional limit
 app.use(cors())
 
 // routes middleware
-readdirSync("./routes").map((r) => 
-    app.use("/api", require("./routes/" + r ))
-)
+readdirSync('./routes').map((r) => app.use('/api', require('./routes/' + r)))
 
 // port
 const port = process.env.PORT || 8000
