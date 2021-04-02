@@ -14,7 +14,7 @@ exports.create = async (req, res) => {
 
 exports.remove = async (req, res) => {
   try {
-    res.json(await Coupon.findByIdAndDelete(req.params.couponId)).exec()
+    res.json(await Coupon.findByIdAndDelete(req.params.couponId).exec())
   } catch (err) {
     console.log(err)
   }
@@ -23,7 +23,7 @@ exports.remove = async (req, res) => {
 exports.list = async (req, res) => {
   try {
     //   list out all of the coupons sorted
-    res.json(await Coupon.find({}).sort({ createdAt: -1 })).exec()
+    res.json(await Coupon.find({}).sort({ createdAt: -1 }).exec())
   } catch (err) {
     console.log(err)
   }
