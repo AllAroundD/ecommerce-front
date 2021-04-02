@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
-const Checkout = () => {
+const Checkout = ({ history }) => {
   const [products, setProducts] = useState([])
   const [total, setTotal] = useState(0)
   const [address, setAddress] = useState('')
@@ -69,12 +69,20 @@ const Checkout = () => {
       console.log('RES ON COUPON APPLIED', res.data)
       if (res.data) {
         setTotalAfterDiscount(res.data)
-        // update Redux coupon applied
+        // update Redux coupon applied true/false
+        dispatch({
+          type: 'COUPON_APPLIED',
+          payload: true,
+        })
       }
       // error
       if (res.data.err) {
         setDiscountError(res.data.err)
-        // update Redux coupon applied
+        // update Redux coupon applied true/false
+        dispatch({
+          type: 'COUPON_APPLIED',
+          payload: false,
+        })
       }
     })
   }
@@ -93,7 +101,7 @@ const Checkout = () => {
       <div key={i}>
         <p>
           {p.product.title} ({p.color}) x {p.count} = $
-          {p.product.price * p.count}
+          {(p.product.price * p.count).toFixed(2)}
         </p>
       </div>
     ))
@@ -136,7 +144,7 @@ const Checkout = () => {
         <hr />
         {showProductSummary()}
         <hr />
-        <p>Cart Total: ${total}</p>
+        <p>Cart Total: ${total.toFixed(2)}</p>
 
         {totalAfterDiscount > 0 && (
           <p className="bg-success p-2">
@@ -149,6 +157,7 @@ const Checkout = () => {
             <button
               disabled={!addressSaved || !products.length}
               className="btn btn-primary"
+              onClick={() => history.push('/payment')}
             >
               Place Order
             </button>

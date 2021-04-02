@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
@@ -29,6 +29,7 @@ import Shop from './pages/Shop'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import CreateCouponPage from './pages/admin/coupon/CreateCouponPage'
+import Payment from './pages/Payment'
 
 import { auth } from './firebase'
 import { useDispatch } from 'react-redux'
@@ -57,7 +58,10 @@ const App = () => {
               },
             })
           })
-          .catch((err) => console.error(err))
+          .catch((err) => {
+            console.error(err)
+            toast.error('There is an issue with the token. Please login again.')
+          })
       }
     })
 
@@ -101,6 +105,7 @@ const App = () => {
         <Route exact path="/cart" component={Cart} />
         <UserRoute exact path="/checkout" component={Checkout} />
         <AdminRoute exact path="/admin/coupon" component={CreateCouponPage} />
+        <UserRoute exact path="/payment" component={Payment} />
       </Switch>
     </>
   )
