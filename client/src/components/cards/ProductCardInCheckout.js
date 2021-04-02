@@ -22,6 +22,7 @@ const ProductCardInCheckout = ({ p }) => {
         cart = JSON.parse(localStorage.getItem('ecomm_cart'))
       }
 
+      // set color in case it was changed by user
       cart.forEach((product, i) => {
         if (product._id === p._id) {
           cart[i].color = e.target.value
@@ -105,7 +106,7 @@ const ProductCardInCheckout = ({ p }) => {
           </div>
         </td>
         <td>{p.title}</td>
-        <td>${p.price}</td>
+        <td>${p.price.toFixed(2)}</td>
         <td>{p.brand}</td>
         <td>
           <select
