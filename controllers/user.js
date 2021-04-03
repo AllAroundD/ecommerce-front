@@ -107,11 +107,13 @@ exports.applyCouponToUserCart = async (req, res) => {
     (cartTotal * validCoupon.discount) / 100
   ).toFixed(2)
 
+  console.log('--------->', totalAfterDiscount)
+
   Cart.findOneAndUpdate(
     { orderdBy: user._id },
     { totalAfterDiscount },
     { new: true },
-  )
+  ).exec()
   // return the total after discount
   res.json(totalAfterDiscount)
 }
