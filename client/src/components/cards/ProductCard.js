@@ -51,7 +51,7 @@ const ProductCard = ({ product }) => {
     }
   }
 
-  const { title, description, images, slug, price } = product
+  const { title, description, images, slug, price, quantity } = product
   return (
     <>
       {product && product.ratings && product.ratings.length > 0 ? (
@@ -75,10 +75,10 @@ const ProductCard = ({ product }) => {
             View Product
           </Link>,
           <Tooltip title={tooltip}>
-            <a onClick={handleAddToCart}>
+            <a onClick={handleAddToCart} disabled={quantity < 1}>
               <ShoppingCartOutlined className="text-danger" />
               <br />
-              Add to Cart
+              {quantity < 1 ? 'Out of stock' : 'Add to Cart'}
             </a>
           </Tooltip>,
         ]}

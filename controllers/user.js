@@ -101,14 +101,14 @@ exports.applyCouponToUserCart = async (req, res) => {
     .populate('products.product', '_id title price')
     .exec()
 
-  console.log('cartTotal', cartTotal, 'discount%', validCoupon.discount)
+  // console.log('cartTotal', cartTotal, 'discount%', validCoupon.discount)
   // calculate the total after discount
   let totalAfterDiscount = (
     cartTotal -
     (cartTotal * validCoupon.discount) / 100
   ).toFixed(2)
 
-  console.log('--------->', totalAfterDiscount)
+  // console.log('--------->', totalAfterDiscount)
 
   Cart.findOneAndUpdate(
     { orderedBy: user._id },
@@ -145,6 +145,17 @@ exports.createOrder = async (req, res) => {
   let updated = await Product.bulkWrite(bulkOption, {})
   // console.log('PRODUCT QUANTITY--- AND SOLD+++', updated)
 
-  console.log('NEW ORDER SAVED', newOrder)
+  console.log('New Order Saved: ', newOrder._id)
   res.json({ ok: true })
+}
+
+// get list of user's orders
+exports.orders = async (req, res) => {
+  let user = await User.findOne({ email: req.user.email }).exec()
+
+  let userOrders = await Order.find({ orderedBy: user._id })
+    .populate('products.product')
+    .exec()
+
+  res.json(userOrders)
 }
