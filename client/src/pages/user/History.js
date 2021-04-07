@@ -59,7 +59,12 @@ const History = () => {
         {order.products.map((p, i) => (
           <tr key={i}>
             <td>{p.product.title}</td>
-            <td>{p.product.price.toFixed(2)}</td>
+            <td>
+              {p.product.price.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+              })}
+            </td>
             <td>{p.product.brand}</td>
             <td>{p.color}</td>
             <td>{p.count}</td>

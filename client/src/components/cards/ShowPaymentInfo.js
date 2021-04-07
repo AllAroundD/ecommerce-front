@@ -6,7 +6,7 @@ const ShowPaymentInfo = ({ order, showStatus = true }) => (
       <span>Order Id: {order.paymentIntent.id}</span>{' '}
       <span>
         Amount:{' '}
-        {(order.paymentIntent.amount /= 100).toLocaleString('en-US', {
+        {(order.paymentIntent.amount / 100).toLocaleString('en-US', {
           style: 'currency',
           currency: 'USD',
         })}

@@ -64,9 +64,9 @@ const Checkout = ({ history }) => {
   }
 
   const applyDiscountCoupon = () => {
-    console.log('send coupon to backend', coupon)
+    // console.log('send coupon to backend', coupon)
     applyCoupon(user.token, coupon).then((res) => {
-      console.log('RES ON COUPON APPLIED', res.data)
+      // console.log('RES ON COUPON APPLIED', res.data)
       if (res.data) {
         setTotalAfterDiscount(res.data)
         // update Redux coupon applied true/false
@@ -100,8 +100,11 @@ const Checkout = ({ history }) => {
     products.map((p, i) => (
       <div key={i}>
         <p>
-          {p.product.title} ({p.color}) x {p.count} = $
-          {(p.product.price * p.count).toFixed(2)}
+          {p.product.title} ({p.color}) x {p.count} =
+          {(p.product.price * p.count).toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD',
+          })}
         </p>
       </div>
     ))
@@ -144,11 +147,21 @@ const Checkout = ({ history }) => {
         <hr />
         {showProductSummary()}
         <hr />
-        <p>Cart Total: ${total.toFixed(2)}</p>
+        <p>
+          Cart Total:{' '}
+          {total.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD',
+          })}
+        </p>
 
         {totalAfterDiscount > 0 && (
           <p className="bg-success p-2">
-            Discount applied: Total Payable: ${totalAfterDiscount}
+            Discount applied: Total Payable: $
+            {totalAfterDiscount.toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            })}
           </p>
         )}
 

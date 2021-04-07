@@ -110,7 +110,13 @@ const StripeCheckout = ({ history }) => {
       {!succeeded && (
         <div>
           {coupon && totalAfterDiscount !== undefined ? (
-            <p className="alert-success">{`Total after discount: $${totalAfterDiscount}`}</p>
+            <p className="alert-success">{`Total after discount: ${totalAfterDiscount.toLocaleString(
+              'en-US',
+              {
+                style: 'currency',
+                currency: 'USD',
+              },
+            )}`}</p>
           ) : (
             <p className="alert-danger">No coupon applied</p>
           )}
@@ -133,10 +139,18 @@ const StripeCheckout = ({ history }) => {
             <>
               <DollarOutlined className="text-info" />
               <br />
-              Total: ${cartTotal.toFixed(2)}
+              Total:{' '}
+              {cartTotal.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+              })}
               <CheckOutlined className="text-info" />
               <br />
-              Total payable: ${(payable / 100).toFixed(2)}
+              Total payable:{' '}
+              {(payable / 100).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+              })}
             </>,
           ]}
         />

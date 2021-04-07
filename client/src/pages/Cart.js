@@ -64,12 +64,22 @@ const Cart = ({ history }) => {
           {cart.map((c, i) => (
             <div key={i}>
               <p>
-                {c.title} x {c.count} = ${(c.price * c.count).toFixed(2)}
+                {c.title} x {c.count} ={' '}
+                {(c.price * c.count).toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                })}
               </p>
             </div>
           ))}
           <hr />
-          Total: <b>${getTotal().toFixed(2)}</b>
+          Total:{' '}
+          <b>
+            {getTotal().toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            })}
+          </b>
           <hr />
           {user ? (
             <button

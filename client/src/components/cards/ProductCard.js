@@ -84,7 +84,10 @@ const ProductCard = ({ product }) => {
         ]}
       >
         <Meta
-          title={`${title} - $${price}`}
+          title={`${title} - ${price.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD',
+          })}`}
           description={`${description && description.substring(0, 50)}...`}
         />
         {title}
