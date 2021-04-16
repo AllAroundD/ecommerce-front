@@ -10,7 +10,7 @@ import Invoice from '../../components/order/Invoice'
 
 const History = () => {
   const [orders, setOrders] = useState([])
-  const { user } = useSelector((state) => ({ ...state }))
+  const { user, COD } = useSelector((state) => ({ ...state }))
 
   useEffect(() => {
     loadUserOrders()
@@ -33,9 +33,9 @@ const History = () => {
   )
 
   const showEachOrders = () =>
-    orders.map((order, i) => (
+    orders.reverse().map((order, i) => (
       <div key={i} className="m-5 p-3 card">
-        {<ShowPaymentInfo order={order} />}
+        {<ShowPaymentInfo order={order} COD={COD} />}
         {showOrderInTable(order)}
         <div className="row">
           <div className="col">{showDownloadLink(order)}</div>

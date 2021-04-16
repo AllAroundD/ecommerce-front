@@ -20,6 +20,7 @@ const orderSchema = new Schema(
       default: 'Not Processed',
       enum: [
         'Not Processed',
+        'Cash On Delivery',
         'Processing',
         'Dispatched',
         'Cancelled',

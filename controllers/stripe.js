@@ -19,12 +19,7 @@ exports.createPaymentIntent = async (req, res) => {
     orderedBy: user._id,
   }).exec()
 
-  //   console.log(
-  //     'CART TOTAL TO CHARGE',
-  //     cartTotal,
-  //     'AFTER DISC%',
-  //     totalAfterDiscount,
-  //   )
+  //   console.log('CART TOTAL TO CHARGE', cartTotal, 'AFTER DISC%',totalAfterDiscount,)
 
   let finalAmount = 0
 

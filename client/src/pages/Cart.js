@@ -18,7 +18,21 @@ const Cart = ({ history }) => {
     // console.log('cart', JSON.stringify(cart, null, 4))
     userCart(cart, user.token)
       .then((res) => {
-        console.log('CART POST RES', res)
+        // console.log('CART POST RES', res)
+        if (res.data.ok) history.push('/checkout')
+      })
+      .catch((err) => console.log('cart save error', err))
+  }
+
+  const saveCashOrderToDB = () => {
+    // console.log('cart', JSON.stringify(cart, null, 4))
+    dispatch({
+      type: 'COD',
+      payload: true,
+    })
+    userCart(cart, user.token)
+      .then((res) => {
+        // console.log('CART POST RES', res)
         if (res.data.ok) history.push('/checkout')
       })
       .catch((err) => console.log('cart save error', err))
@@ -82,13 +96,23 @@ const Cart = ({ history }) => {
           </b>
           <hr />
           {user ? (
-            <button
-              onClick={saveOrderToDB}
-              className="btn btn-sm btn-primary mt-2"
-              disabled={!cart.length}
-            >
-              Proceed to Checkout
-            </button>
+            <>
+              <button
+                onClick={saveOrderToDB}
+                className="btn btn-sm btn-primary mt-2"
+                disabled={!cart.length}
+              >
+                Proceed to Checkout
+              </button>
+              <br />
+              <button
+                onClick={saveCashOrderToDB}
+                className="btn btn-sm btn-warning mt-2"
+                disabled={!cart.length}
+              >
+                Pay Cash on Delivery
+              </button>
+            </>
           ) : (
             <button className="btn btn-sm btn-primary mt-2">
               <Link to={{ pathname: '/login', state: { from: 'cart' } }}>

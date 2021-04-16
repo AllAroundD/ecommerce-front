@@ -19,8 +19,10 @@ const ShowPaymentInfo = ({ order, showStatus = true }) => (
       {' / '}
       <span>
         <br />
-        Ordered on:{' '}
-        {new Date(order.paymentIntent.created * 1000).toLocaleString()}
+        Ordered on: {/* Date is shown differently from Stripe */}
+        {order.paymentIntent.payment_method
+          ? new Date(order.paymentIntent.created * 1000).toLocaleString()
+          : new Date(order.paymentIntent.created).toLocaleString()}
       </span>
       <br />
       {showStatus && (
