@@ -141,7 +141,7 @@ exports.productStar = async (req, res) => {
         },
         { new: true },
       ).exec()
-      console.log('ratingsAdded', ratingsAdded)
+      // console.log('ratingsAdded', ratingsAdded)
       res.json(ratingsAdded)
     } else {
       // if user has already left rating, update it
@@ -152,7 +152,7 @@ exports.productStar = async (req, res) => {
         { $set: { 'ratings.$.star': star } },
         { new: true },
       ).exec()
-      console.log('ratingUpdated', ratingUpdated)
+      // console.log('ratingUpdated', ratingUpdated)
       res.json(ratingUpdated)
     }
   } catch (err) {
