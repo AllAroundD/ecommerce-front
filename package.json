@@ -1,50 +1,59 @@
 {
-  "name": "ecommerce",
-  "version": "1.0.0",
-  "description": "MERN Stack E-commerce Project using React Redux Node MongoDB and Ant Design",
-  "main": "server.js",
-  "scripts": {
-    "client": "npm start --prefix client",
-    "start": "by-node-env",
-    "start:production": "node server.js",
-    "start:development": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AllAroundD/ecommerce.git"
-  },
-  "keywords": [
-    "E-commerce",
-    "React",
-    "Redux",
-    "Node",
-    "MongoDB"
-  ],
-  "author": "Doug Moore",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/AllAroundD/ecommerce/issues"
-  },
-  "homepage": "https://github.com/AllAroundD/ecommerce#readme",
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "by-node-env": "^2.0.1",
-    "cloudinary": "^1.24.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "express-jwt": "^6.0.0",
-    "firebase-admin": "^9.4.2",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.9",
-    "morgan": "^1.10.0",
-    "slugify": "^1.4.6",
-    "stripe": "^8.142.0",
-    "uniqueid": "^1.0.0"
+    "@ant-design/icons": "^4.3.0",
+    "@david.kucsai/react-pdf-table": "^0.3.0",
+    "@react-pdf/renderer": "^1.6.16",
+    "@stripe/react-stripe-js": "^1.4.0",
+    "@stripe/stripe-js": "^1.13.2",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "antd": "^4.8.5",
+    "axios": "^0.21.1",
+    "firebase": "^8.1.1",
+    "lodash": "^4.17.20",
+    "react": "^17.0.1",
+    "react-datepicker": "^3.6.0",
+    "react-dom": "^17.0.1",
+    "react-image-file-resizer": "^0.4.1",
+    "react-modal-image": "^2.5.0",
+    "react-quill": "^1.3.5",
+    "react-redux": "^7.2.2",
+    "react-responsive-carousel": "^3.2.12",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.1",
+    "react-star-ratings": "^2.3.0",
+    "react-toastify": "^6.1.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "typewriter-effect": "^2.17.0",
+    "web-vitals": "^0.2.4"
   },
-  "devDependencies": {
-    "concurrently": "^5.3.0",
-    "dotenv": "^8.2.0",
-    "nodemon": "^2.0.7"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
