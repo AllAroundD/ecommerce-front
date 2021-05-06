@@ -109,10 +109,14 @@ const App = () => {
   return (
     <Suspense
       fallback={
-        <div className="col text-center p-5">
-          __ EC
-          <LoadingOutlined />
-          MMERCE __ Store
+        // <div className="col text-center p-5">
+        //   __ EC
+        //   <LoadingOutlined />
+        //   MMERCE __ Store
+        // </div>
+
+        <div className="container">
+          <div className="loading"></div>
         </div>
       }
     >

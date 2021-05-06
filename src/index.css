@@ -1,3 +1,20 @@
+/***** Loading ****/
+.loading {
+  width: 6rem;
+  height: 6rem;
+  border: 0.3rem solid #ccc;
+  border-radius: 50%;
+  border-top-color: #645cff;
+  animation: spinner 0.6s linear infinite;
+  margin: 5rem auto;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .slider img,
 .card-image {
   height: 450px;
