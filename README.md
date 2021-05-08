@@ -34,8 +34,9 @@ This is the front end for the MERN ecommerce site.
 
 ## Usage
 
-See above to install. Application is also available [here] (https://ecommerce-store-dm.netlify.app/).
+See above to install. Application is also available [here](https://ecommerce-store-dm.netlify.app/).
 There is an administration section for the Administrator to set up Categories, Sub Categories, Products.
+
 Users can:
 
 - register and login using email address. Email will be sent.
