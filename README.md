@@ -34,7 +34,18 @@ This is the front end for the MERN ecommerce site.
 
 ## Usage
 
-See above.
+See above to install. Application is also available [here] (https://ecommerce-store-dm.netlify.app/).
+There is an administration section for the Administrator to set up Categories, Sub Categories, Products.
+Users can:
+
+- register and login using email address. Email will be sent.
+- search for items and add to cart or wishlist, and pay using Stripe or pay using Cash on Delivery. (The stripe test account is 4242 4242 4242 4242 042424242424).
+- leave ratings for products.
+
+Administrator can:
+
+- view all purchase orders and set status.
+- can download pdf of purchase order.
 
 <a id='toc-license'></a>
 
