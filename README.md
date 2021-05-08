@@ -45,6 +45,7 @@ Users can:
 
 Administrator can:
 
+- create/view Categories, Sub Categories, Products.
 - view all purchase orders and set status.
 - can download pdf of purchase order.
 
