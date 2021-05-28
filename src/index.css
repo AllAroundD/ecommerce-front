@@ -24,3 +24,7 @@
 .pointer {
   cursor: pointer;
 }
+
+.attribution {
+  margin-left: 1rem;
+}

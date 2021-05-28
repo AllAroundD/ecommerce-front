@@ -33,6 +33,17 @@ const Home = () => {
       <SubList />
       <br />
       <br />
+      <div className="attribution">
+        FavIcon made by{' '}
+        <a
+          href="https://www.freepik.com"
+          target="_blank"
+          rel="noreferrer"
+          title="Freepik"
+        >
+          Freepik
+        </a>
+      </div>
     </>
   )
 }
